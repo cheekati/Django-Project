@@ -1,0 +1,123 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- partial -->
+
+
+
+    <div class="container-fluid page-body-wrapper">
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="d-lg-flex align-items-baseline">
+                <h5 class="text-dark mb-0">
+                  Hi, welcome back!
+                </h5>
+                <p class="ml-md-3 font-weight-light mb-0 mt-1">Last login was {{request.user.last_login}} ago.</p>
+              </div>
+            </div>
+          </div>
+          <div class="row pt-4">
+            <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                    <h4 class="card-title" style="float: left;">Questionnare</h4>
+                  </div>
+                      {% if answer %}
+                      <div class="table-responsive">
+                        {% csrf_token %}
+
+                        {{answer.question.question_text}}
+                        <br/>
+                        <br/>
+                        <div>
+                          <label>
+                            <input type="checkbox" class="radio" value="1" name="fooby[2][]" />None of the time</label>
+                          <label>
+                            <input type="checkbox" class="radio" value="2" name="fooby[2][]" />Rarely</label>
+                          <label>
+                            <input type="checkbox" class="radio" value="3" name="fooby[2][]" />Some of the time</label>
+                          <label>
+                            <input type="checkbox" class="radio" value="4" name="fooby[2][]" />Often</label>
+                          <label>
+                            <input type="checkbox" class="radio" value="5" name="fooby[2][]" />All of the time</label>
+                        </div>
+
+                      </div>
+                      <div class="col-md-6" align="right">
+                        <button type="button" class="btn btn-outline-primary btn-icon-text" id="save">
+                          <i class="mdi mdi-account-edit btn-icon-prepend"></i>                                                    
+                          Save
+                        </button>
+                      </div>
+                      {% else %}
+                      <p>Thanks for the response your questionnare was completed</p>
+                      {% endif %}
+
+
+                      
+                  </div>
+                </div>
+            </div>
+          </div>
+        
+   
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+      <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+{% endblock %}
+{% block script %}
+  <script type="text/javascript">
+   $( document ).ready(function() {
+
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+        $('#save').click(function(){
+          var val = [];
+          $(':checkbox:checked').each(function(i){
+            val[i] = $(this).val();
+          });
+          debugger;
+          if (val.length>0){
+          $.ajax({
+              url: '/update_answer/',
+              type: "POST",
+              data: {
+                csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+                response:val[0],
+                aid:'{{answer.id}}',
+            },
+            success: function (data,json) {
+                location.reload();
+            },  
+            error: function (xhr, errmsg, err) {
+              // display_errors('Error Processing Ajax')
+            }
+            });
+        }
+ 
+});
+      });    
+
+  </script>
+{% endblock %}

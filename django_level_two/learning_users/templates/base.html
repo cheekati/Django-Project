@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html ng-app="baseApp" ng-csp>
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Test Portal</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="{% static "css/dataTables.bootstrap4.css" %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static "css/flag-icon.min.css" %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="{% static "css/materialdesignicons.min.css" %}">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static "css/vendor.bundle.base.css" %}">
+  <link rel="stylesheet" href="{% static "css/bootstrap-datepicker.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/select2.min.css" %}">
+     <link rel="stylesheet" href="{% static "css/select2.min.css" %}">
+         <link rel="stylesheet" href="{% static "css/select2-bootstrap.min.css" %}">
+     
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/-->
+
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <!-- <link rel="stylesheet" href="{% static "css/" %}"> -->
+  <!-- Google Font -->
+  <link rel="apple-touch-icon" sizes="57x57" href="{% static "images/apple-icon-57x57.png" %}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{% static "images/apple-icon-60x60.png" %}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{% static "images/apple-icon-72x72.png" %}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{% static "images/apple-icon-76x76.png" %}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{% static "images/apple-icon-114x114.png" %}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{% static "images/apple-icon-120x120.png" %}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{% static "images/apple-icon-144x144.png" %}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{% static "images/apple-icon-152x152.png" %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static "images/apple-icon-180x180.png" %}">
+  <link rel="icon" type="image/png" sizes="192x192"  href="{% static "images/android-icon-192x192.png" %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static "images/favicon-32x32.png" %}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{% static "images/favicon-96x96.png" %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static "images/favicon-16x16.png" %}">
+	<!-- END Page level css -->
+</head>
+<!-- <div class="translayer" ng-if="cantouch == false"></div> -->
+<!-- Header -->
+
+<!-- {% include "header.html" %} -->
+<!-- Header END -->
+<!-- Menu -->
+<body>
+<div class="container-scroller">
+{% include "menu.html" %}
+<!-- Menu END -->
+<!-- Menu -->
+<!-- Menu END -->
+<!-- Footer -->
+
+
+{% block content %}
+
+{% endblock %}
+{% include "footer.html" %}
+<!-- Footer END -->
+<!-- Scripts END -->
+<!-- Page level scripts -->
+{% block scripts %}
+  {% include "scripts.html" %}
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+</div>
+</body>
+</html>

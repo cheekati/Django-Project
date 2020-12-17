@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- Main content -->
+      <div class="container-fluid page-body-wrapper">
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="d-lg-flex align-items-baseline">
+                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle" >
+              <!-- <span class="mdi mdi-menu"> Add User</span> -->
+            </button>
+              </div>
+            </div>
+          </div>
+          <div class="row pt-4">
+            <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title" style="float: left;">Videos</h4>
+                      <div>
+                     <video width="1000" height="500" controls class="mt-4 mb-4">
+                      <source src="/media/DescartesNeo Quick walkthrough small.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                    </video>
+                    </div>
+                    <div>
+                     <video width="1000" height="500" controls class="mt-4 mb-4">
+                      <source src="/media/DescartesR quick walkthrough small.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                    </video>
+                    </div> 
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div> 
+      </div> 
+    </div>    
+
+    {% endblock %}    
+    {% block script %}    
+  <script type="text/javascript">
+      $( document ).ready(function() {
+            
+             
+      });    
+    </script>       
+{% endblock %}

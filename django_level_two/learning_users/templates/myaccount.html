@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!-- Main content -->
+  <div class="container-fluid page-body-wrapper">
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-6">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb breadcrumb-custom bg-inverse-custom">
+                        <li class="breadcrumb-item"><a href="/users/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><span>My Account</span></li>
+                      </ol>
+                    </nav>
+            </div>
+            <div class="col-md-6" align="right">
+              <button type="button" class="btn btn-outline-primary btn-icon-text" id="editbutton">
+                          <i class="mdi mdi-account-edit btn-icon-prepend"></i>                                                    
+                          Edit
+                        </button>
+         
+                       
+                        <button type="button" class="btn btn-outline-success btn-icon-text" id="showsubmit">
+                          <i class="mdi mdi-send btn-icon-prepend"></i>                                                    
+                          Save
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-icon-text" id="showcancel">
+                          <i class="mdi mdi-cancel btn-icon-prepend"></i>                                                    
+                         Cancel
+                        </button>
+                     
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Manage My Account</h4>
+                  <form class="form-sample" name="save-user" method="POST" id='target-form'>
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">User Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Username" placeholder="Username" value = {{user.username}} disabled>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Email</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Email" placeholder="Email" value={{user.email}}>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">First Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="FirstName" placeholder="First Name" value = {{user.first_name}}>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Last Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="LastName" placeholder="Last Name" value = {{user.last_name}}>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Contact</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="Contact" placeholder="Contact" value={{user.contact}}>
+                          </div>
+                        </div>
+                      </div>
+                      {% if request.user.role == 'Administrator' %}
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Role</label>
+                          <div class="col-sm-9">
+                              <select class="form-control" id='role' value='{{user.role}}'>
+                              <option value='Verifier' {% if user.role == 'Verifier' %}selected{%endif%} >Verifier</option>
+                              <option value='Administrator' {% if user.role == 'Administrator' %}selected{%endif%}>Administrator</option>
+                              <option value='Organizer' {% if user.role == 'Organizer' %}selected{%endif%}>Organizer</option>
+                              <option value='Observer' {% if user.role == 'Observer' %}selected{%endif%}>Observer</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      {% endif %}
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Manager Email</label>
+                          <div class="col-sm-9">
+                            <input type="text" class="form-control" id="manager_email" placeholder="Manager Email" value={{user.manager_email}}>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Slack ID</label>
+                          <div class="col-sm-9">
+                              <input type="text" class="form-control" id="slack_id" placeholder="Slack ID" value={{user.slack_id}}>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+           
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+
+
+
+   
+        </div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+
+  $( document ).ready(function() {
+    $("#target-form :input").prop("disabled", true);
+      $('#editbutton').click(function() {
+        $("#target-form :input").prop("disabled", false);
+      });
+       $('#editbutton').trigger('click');
+      $('#showcancel').click(function() {
+        $("#target-form :input").prop("disabled", true);
+      });
+    $("#Username").prop('disabled', true);
+    $('#showsubmit').click(function(){
+      var error_msgs = [];
+      if($('#Username').val() == ""){
+        validate('#Username');
+        error_msgs.push('Username is Required');
+      }
+      if($('#Email').val() == ""){
+          validate('#Email');
+          error_msgs.push('Email is Required');
+      }
+      if($('#FirstName').val() == ""){
+          validate('#FirstName');
+          error_msgs.push('FirstName is Required');   
+      }
+      if($('#LastName').val() == ""){
+          validate('#LastName');
+          error_msgs.push('LastName is Required');
+      }
+      if($('#Contact').val() == ""){
+          validate('#Contact');
+          error_msgs.push('Contact is Required');
+      }
+      if($('#manager_email').val() == ""){
+          validate('#manager_email');
+          error_msgs.push('Manager Email is Required');
+      }
+      if($('#slack_id').val() == ""){
+          validate('#slack_id');
+          error_msgs.push('Manager Email is Required');
+      }
+      if (error_msgs.length>0) {
+          var errors = error_msgs.join("<br/>");
+          display_errors(errors)
+      }else{
+              $.ajax({
+                  url: window.location.href,
+                  type: "POST",
+                  data: {
+                    csrfmiddlewaretoken: getCookie('csrftoken'),
+                    username:$('#Username').val(),
+                    first_name:$('#FirstName').val(),
+                    last_name:$('#LastName').val(),
+                    email:$('#Email').val(),
+                    contact:$('#Contact').val(),
+                    role:$('#role').val(),
+                    manager_email:$('#manager_email').val(),
+                    slack_id:$('#slack_id').val(),
+              },
+              success: function (json) {
+                  display_success('Saved Successfully')
+                               
+              },
+              error: function (xhr, errmsg, err) {
+                display_errors('Error Processing AJAX')
+              }
+            });
+    }
+    });    
+  });
+</script>
+{% endblock %}
