@@ -117,35 +117,35 @@ def view_userdetails(request, user_id):
         user = UserProfileInfo.objects.get(user__id=user_id)
     except:
         user = None
-    if request.method == 'POST':
-        username = request.POST['username']
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        email = request.POST['email']
-        age = request.POST['age']
-        gender = request.POST['gender']
-        ethnicity = request.POST['ethnicity']
+    # if request.method == 'POST':
+    #     username = request.POST['username']
+    #     first_name = request.POST['first_name']
+    #     last_name = request.POST['last_name']
+    #     email = request.POST['email']
+    #     age = request.POST['age']
+    #     gender = request.POST['gender']
+    #     ethnicity = request.POST['ethnicity']
         
-        user.username = username
-        user.first_name = first_name
-        user.last_name = last_name
-        user.email = email
-        user.contact = contact
-        user.manager_email = manager_email
-        user.slack_id = slack_id
-        if role != '':
-            user.role = role
-        user.save()
-        msg = 'A User Profile has been updated on username '+user.username 
-        activity = 'User Profile Updation'
-        page='User Account Page'
-        create_activity_log(request,activity,msg,page)
-        # send_to_slack(msg)
-        return HttpResponse(json.dumps({
-                        'type': 'success',
-                        'message': 'User saved successfully'
-                    }))        
-    return render(request,'myaccount.html',{'user':user})        
+    #     user.username = username
+    #     user.first_name = first_name
+    #     user.last_name = last_name
+    #     user.email = email
+    #     user.contact = contact
+    #     user.manager_email = manager_email
+    #     user.slack_id = slack_id
+    #     if role != '':
+    #         user.role = role
+    #     user.save()
+    #     msg = 'A User Profile has been updated on username '+user.username 
+    #     activity = 'User Profile Updation'
+    #     page='User Account Page'
+    #     create_activity_log(request,activity,msg,page)
+    #     # send_to_slack(msg)
+    #     return HttpResponse(json.dumps({
+    #                     'type': 'success',
+    #                     'message': 'User saved successfully'
+    #                 }))        
+    return render(request,'myaccount.html',{'iuser':user})        
 
 def welcome(request):
     return render(request, 'welcome.html', {})

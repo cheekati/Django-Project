@@ -15,7 +15,7 @@
                     </nav>
             </div>
             <div class="col-md-6" align="right">
-              <button type="button" class="btn btn-outline-primary btn-icon-text" id="editbutton">
+              <!-- <button type="button" class="btn btn-outline-primary btn-icon-text" id="editbutton">
                           <i class="mdi mdi-account-edit btn-icon-prepend"></i>                                                    
                           Edit
                         </button>
@@ -28,7 +28,7 @@
                         <button type="button" class="btn btn-outline-warning btn-icon-text" id="showcancel">
                           <i class="mdi mdi-cancel btn-icon-prepend"></i>                                                    
                          Cancel
-                        </button>
+                        </button> -->
                      
             </div>
           </div>
@@ -44,7 +44,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">User Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="Username" placeholder="Username" value = {{user.username}} disabled>
+                            <input type="text" class="form-control" id="Username" placeholder="Username" value = {{iuser.user.username}} disabled>
                           </div>
                         </div>
                       </div>
@@ -52,7 +52,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Email</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="Email" placeholder="Email" value={{user.email}}>
+                            <input type="text" class="form-control" id="Email" placeholder="Email" value={{iuser.user.email}}>
                           </div>
                         </div>
                       </div>
@@ -62,7 +62,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">First Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="FirstName" placeholder="First Name" value = {{user.first_name}}>
+                            <input type="text" class="form-control" id="FirstName" placeholder="First Name" value = {{iuser.user.first_name}}>
                           </div>
                         </div>
                       </div>
@@ -70,7 +70,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Last Name</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="LastName" placeholder="Last Name" value = {{user.last_name}}>
+                            <input type="text" class="form-control" id="LastName" placeholder="Last Name" value = {{iuser.user.last_name}}>
                           </div>
                         </div>
                       </div>
@@ -78,42 +78,28 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Contact</label>
+                          <label class="col-sm-3 col-form-label">Gender</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="Contact" placeholder="Contact" value={{user.contact}}>
+                            <input type="text" class="form-control" id="Contact" placeholder="Contact" value={{iuser.gender}}>
                           </div>
                         </div>
                       </div>
-                      {% if request.user.role == 'Administrator' %}
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Role</label>
-                          <div class="col-sm-9">
-                              <select class="form-control" id='role' value='{{user.role}}'>
-                              <option value='Verifier' {% if user.role == 'Verifier' %}selected{%endif%} >Verifier</option>
-                              <option value='Administrator' {% if user.role == 'Administrator' %}selected{%endif%}>Administrator</option>
-                              <option value='Organizer' {% if user.role == 'Organizer' %}selected{%endif%}>Organizer</option>
-                              <option value='Observer' {% if user.role == 'Observer' %}selected{%endif%}>Observer</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      {% endif %}
+                      
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Manager Email</label>
+                          <label class="col-sm-3 col-form-label"> Age</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="manager_email" placeholder="Manager Email" value={{user.manager_email}}>
+                            <input type="text" class="form-control" id="manager_email" placeholder="Manager Email" value={{iuser.age}}>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Slack ID</label>
+                          <label class="col-sm-3 col-form-label">Ethnicity</label>
                           <div class="col-sm-9">
-                              <input type="text" class="form-control" id="slack_id" placeholder="Slack ID" value={{user.slack_id}}>
+                              <input type="text" class="form-control" id="slack_id" placeholder="Slack ID" value={{iuser.ethnicity}}>
                           </div>
                         </div>
                       </div>
