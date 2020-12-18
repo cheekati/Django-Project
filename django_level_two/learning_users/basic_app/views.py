@@ -14,15 +14,25 @@ import json
 # Create your views here.
 def index(request):
     answers = Answer.objects.filter(user=request.user)
-    if not answers:
+    question_count = Question.objects.all().count()
+    if answers.count() != question_count:
         questions = Question.objects.all()
         for question in questions:
-            answer = Answer()
-            answer.question = question
-            answer.user = request.user
-            answer.save()
+            try:
+                answer = Answer.objects.get(question=question,user=request.user)
+            except:
+                answer = Answer()
+                answer.question = question
+                answer.user = request.user
+                answer.save()
 
-    answer = Answer.objects.filter(user=request.user,is_answered=False)
+    answer = Answer.objects.filter(user=request.user,is_answered=False,question__question_type='1')
+    if not answer:
+        answer2 = Answer.objects.filter(user=request.user,is_answered=False,question__question_type='2')
+        answer = answer2
+        if not answer2:
+            answer3 = Answer.objects.filter(user=request.user,is_answered=False,question__question_type='3')
+            answer = answer3
     if answer:
         answer = answer[0]
     else:

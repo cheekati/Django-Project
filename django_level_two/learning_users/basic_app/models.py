@@ -24,7 +24,13 @@ class UserProfileInfo(models.Model):
 
 
 class Question(models.Model):
+	QUESTION_CHOICES = (
+	('1','1'),
+	('2','2'),
+	('3','3'),
+	)
 	question_text = models.CharField(max_length=500)
+	question_type = models.CharField(choices=QUESTION_CHOICES,max_length=2,null=True,blank=True,default='1')
 
 class Answer(models.Model):
 	ANSWER_CHOICES = (

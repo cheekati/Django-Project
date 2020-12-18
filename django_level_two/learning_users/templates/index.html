@@ -22,26 +22,46 @@
           <div class="row pt-4">
             <div class="col-12">
                 <div class="card">
+                  {% if answer %}
                   <div class="card-body">
                     <div class="row">
-                    <h4 class="card-title" style="float: left;">Questionnare</h4>
+                      {% if answer.question.question_type == '1' %}
+                    <h4 class="card-title" style="float: left;">Warwick-Edinburg Mental Well-being Scale</h4>
+                    <br/>
+                    <br/>
+                    {% elif answer.question.question_type == '2' %}
+                    <h4 class="card-title" style="float: left;">Immune Status Questionnaire (ISQ)</h4>
+                    {% else %}
+                    <h4 class="card-title" style="float: left;">Perceived Stress Scale</h4>
+                    {% endif %}
                   </div>
-                      {% if answer %}
+                  {% if answer.question.question_type == '1' %}
+                    <div class="row"> 
+
+                    <h6>About Feelings and thoughts</h6>
+                    <br/>
+                    <br/>
+                    </div>
+                    {% endif %}
                       <div class="table-responsive">
                         {% csrf_token %}
 
-                        {{answer.question.question_text}}
+                        Question : {{answer.question.question_text}}
                         <br/>
                         <br/>
                         <div>
                           <label>
                             <input type="checkbox" class="radio" value="1" name="fooby[2][]" />None of the time</label>
+                            <br/>
                           <label>
                             <input type="checkbox" class="radio" value="2" name="fooby[2][]" />Rarely</label>
+                          <br/>
                           <label>
                             <input type="checkbox" class="radio" value="3" name="fooby[2][]" />Some of the time</label>
+                          <br/>
                           <label>
                             <input type="checkbox" class="radio" value="4" name="fooby[2][]" />Often</label>
+                          <br/>
                           <label>
                             <input type="checkbox" class="radio" value="5" name="fooby[2][]" />All of the time</label>
                         </div>
